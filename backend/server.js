@@ -13,8 +13,8 @@ app.get('/health', (req, res) => {
 // Endpoint: /about (Thay thông tin của Nam vào đây)
 app.get('/about', (req, res) => {
     res.json({
-        name: "Võ Nhật Nam",
-        id: "2251220036", 
+        name: "Lê Chí Thanh",
+        id: "2251220025", 
         class: "Lớp 22CT1"
     });
 });
