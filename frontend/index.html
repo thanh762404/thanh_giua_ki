@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DevOps Mini Project - Nam</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; margin-top: 50px; }
+        .card { border: 1px solid #ccc; padding: 20px; display: inline-block; border-radius: 10px; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Thông Tin Sinh Viên</h1>
+        <div id="content">Đang tải dữ liệu từ Backend...</div>
+        <hr>
+        <button onclick="checkHealth()">Check Health</button>
+        <p id="health"></p>
+    </div>
+
+    <script>
+        // Gọi API About
+        fetch('http://localhost:5000/about')
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById('content').innerHTML = `
+                    <p><b>Họ tên:</b> ${data.name}</p>
+                    <p><b>MSSV:</b> ${data.id}</p>
+                    <p><b>Lớp:</b> ${data.class}</p>
+                `;
+            });
+
+        // Gọi API Health
+        function checkHealth() {
+            fetch('http://localhost:5000/health')
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById('health').innerText = "Status: " + data.status;
+                });
+        }
+    </script>
+</body>
+</html>

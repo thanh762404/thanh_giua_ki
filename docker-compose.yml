@@ -1,0 +1,33 @@
+version: '3.8'
+services:
+  # Database (Yêu cầu có DB nhưng không hard-code)
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_DATABASE: devops_db
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+
+  # Backend
+  backend:
+    build: ./backend
+    restart: always
+    ports:
+      - "5000:5000"
+    environment:
+      - PORT=5000
+      - DB_HOST=db
+      - APP_NAME=Nam-DevOps-Project
+    depends_on:
+      - db
+
+  # Frontend
+  frontend:
+    build: ./frontend
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
